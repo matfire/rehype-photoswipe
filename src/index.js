@@ -10,23 +10,29 @@ import probe from "probe-image-size";
  * @type {import('unified').Plugin<Array<void>, Root>}
  */
 const rehypePhotoswipe = () => {
-    console.log("in extension")
   return async (tree) => {
     const promises = [];
 
-    visit(tree, "element", (node) => {
+    visit(tree, "element", (node, index, parent) => {
       if (node.tagName === "img") {
         const { src } = node.properties;
-        console.log(src);
+        const anchorNode = {
+          type: "element",
+          tagName: "a",
+          properties: {
+            href: src,
+          },
+          children: [node]
+        }
         const promise = probe(src)
-        .then(({width, height}) => {
-            node.properties["data-pswp-width"] = width;
-            node.properties["data-pswp-height"] = height;
-            console.log(node)
-        })
-        .catch((e) => {console.log(e)}); // Ignore errors
-      promises.push(promise);
-      }
+          .then(({width, height}) => {
+              anchorNode.properties["data-pswp-width"] = width;
+              anchorNode.properties["data-pswp-height"] = height;
+              parent.children[index] = anchorNode;
+          })
+          .catch((e) => {console.log(e)}); // Ignore errors
+        promises.push(promise);
+        }
     });
 
     await Promise.all(promises);

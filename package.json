@@ -1,6 +1,6 @@
 {
   "name": "@matfire/rehype-photoswipe",
-  "version": "0.0.1",
+  "version": "0.0.11",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "repository": {
