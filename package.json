@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matfire/rehype-photoswipe.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c rollup.config.mjs",
@@ -27,9 +31,8 @@
   "files": [
     "dist"
   ],
-  "licenses": [
-    {
-      "type": "MIT"
-    }
-  ]
+  "bugs": {
+    "url": "https://github.com/matfire/rehype-photoswipe/issues"
+  },
+  "homepage": "https://github.com/matfire/rehype-photoswipe#readme"
 }
