@@ -1,0 +1,35 @@
+{
+  "name": "@matfire/rehype-photoswipe",
+  "version": "0.0.1",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c rollup.config.mjs",
+    "prepublish": "npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "type": "module",
+  "dependencies": {
+    "probe-image-size": "^7.2.3",
+    "unist-util-visit": "^5.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.2",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "rehype": "^13.0.2",
+    "rollup": "^4.34.6"
+  },
+  "files": [
+    "dist"
+  ],
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ]
+}
