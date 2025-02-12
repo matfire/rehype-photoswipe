@@ -14,6 +14,7 @@ const rehypePhotoswipe = () => {
     const promises = [];
 
     visit(tree, "element", (node, index, parent) => {
+      if (!parent || typeof index !== "number") return; // Ensure parent exists
       if (node.tagName === "img") {
         const { src } = node.properties;
         const anchorNode = {
