@@ -1,6 +1,6 @@
 {
   "name": "@matfire/rehype-photoswipe",
-  "version": "0.0.12",
+  "version": "0.0.2",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "repository": {
@@ -18,6 +18,7 @@
   "description": "",
   "type": "module",
   "dependencies": {
+    "hast-util-is-element": "^3.0.0",
     "probe-image-size": "^7.2.3",
     "unist-util-visit": "^5.0.0"
   },

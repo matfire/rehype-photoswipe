@@ -1,4 +1,5 @@
 import { visit } from "unist-util-visit";
+import {isElement} from "hast-util-is-element";
 import probe from "probe-image-size";
 /**
  * @typedef {import('hast').Root} Root
@@ -11,11 +12,14 @@ import probe from "probe-image-size";
  */
 const rehypePhotoswipe = () => {
   return async (tree) => {
+    if (!tree) {
+      console.log("tree is null");
+      return;
+    };
     const promises = [];
-
     visit(tree, "element", (node, index, parent) => {
       if (!parent || typeof index !== "number") return; // Ensure parent exists
-      if (node.tagName === "img") {
+      if (isElement(node, "img")) {
         const { src } = node.properties;
         const anchorNode = {
           type: "element",
@@ -31,12 +35,13 @@ const rehypePhotoswipe = () => {
               anchorNode.properties["data-pswp-height"] = height;
               parent.children[index] = anchorNode;
           })
-          .catch((e) => {console.log(e)}); // Ignore errors
+          .catch((e) => {
+            console.log(`[RehypePhotoswipe]: ${e}`);
+          });
         promises.push(promise);
         }
     });
-
-    await Promise.all(promises);
+      await Promise.allSettled(promises);
   };
 };
 

@@ -1,3 +1,7 @@
+## 0.0.2
+- better logging
+- fail gracefully
+
 ## 0.0.12
 - fixed a bug in the anchor tag
 
