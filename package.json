@@ -1,15 +1,15 @@
 {
   "name": "@matfire/rehype-photoswipe",
   "version": "0.0.2",
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/matfire/rehype-photoswipe.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rollup -c rollup.config.mjs",
+    "build": "tsdown",
     "prepublish": "npm run build"
   },
   "keywords": [],
@@ -27,7 +27,9 @@
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "rehype": "^13.0.2",
-    "rollup": "^4.34.6"
+    "rollup": "^4.34.6",
+    "tsdown": "^0.16.0",
+    "typescript": "^5.9.3"
   },
   "files": [
     "dist"
@@ -35,5 +37,10 @@
   "bugs": {
     "url": "https://github.com/matfire/rehype-photoswipe/issues"
   },
-  "homepage": "https://github.com/matfire/rehype-photoswipe#readme"
+  "homepage": "https://github.com/matfire/rehype-photoswipe#readme",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./package.json": "./package.json"
+  }
 }
