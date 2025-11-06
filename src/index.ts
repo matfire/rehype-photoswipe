@@ -1,16 +1,12 @@
 import { visit } from "unist-util-visit";
 import {isElement} from "hast-util-is-element";
 import probe from "probe-image-size";
-/**
- * @typedef {import('hast').Root} Root
- * @typedef {import('unist').Node} Node
- * @typedef {Root|Root['children'][number]} HastNode
- */
+import { type Plugin } from "unified";
+import {type Root} from "hast"
+import {h} from 'hastscript'
 
-/**
- * @type {import('unified').Plugin<Array<void>, Root>}
- */
-const rehypePhotoswipe = () => {
+
+const rehypePhotoswipe: Plugin<Array<void>, Root> = () => {
   return async (tree) => {
     if (!tree) {
       console.log("tree is null");
@@ -21,14 +17,9 @@ const rehypePhotoswipe = () => {
       if (!parent || typeof index !== "number") return; // Ensure parent exists
       if (isElement(node, "img")) {
         const { src } = node.properties;
-        const anchorNode = {
-          type: "element",
-          tagName: "a",
-          properties: {
+        const anchorNode = h("a",{
             href: src,
-          },
-          children: [node]
-        }
+        }, [node])
         const promise = probe(src)
           .then(({width, height}) => {
               anchorNode.properties["data-pswp-width"] = width;
