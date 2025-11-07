@@ -1,5 +1,3 @@
-## 0.0.2
-
 ## 1.0.0
 
 ### Major Changes
@@ -16,6 +14,8 @@
 
   - switched to typescript
   - switched from rollup to tsdown
+
+## 0.0.2
 
 - better logging
 - fail gracefully
