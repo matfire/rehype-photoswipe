@@ -9,10 +9,10 @@ import {h} from 'hastscript'
 const rehypePhotoswipe: Plugin<Array<void>, Root> = () => {
   return async (tree) => {
     if (!tree) {
-      console.log("tree is null");
+      console.error("tree is null");
       return;
     };
-    const promises = [];
+    const promises: Promise<void>[] = [];
     visit(tree, "element", (node, index, parent) => {
       if (!parent || typeof index !== "number") return; // Ensure parent exists
       if (isElement(node, "img")) {
@@ -20,6 +20,7 @@ const rehypePhotoswipe: Plugin<Array<void>, Root> = () => {
         const anchorNode = h("a",{
             href: src,
         }, [node])
+        if (typeof src !== "string") return;
         const promise = probe(src)
           .then(({width, height}) => {
               anchorNode.properties["data-pswp-width"] = width;
@@ -27,7 +28,7 @@ const rehypePhotoswipe: Plugin<Array<void>, Root> = () => {
               parent.children[index] = anchorNode;
           })
           .catch((e) => {
-            console.log(`[RehypePhotoswipe]: ${e}`);
+            console.error(`[RehypePhotoswipe]: ${e}`);
           });
         promises.push(promise);
         }
